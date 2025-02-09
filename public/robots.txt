@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /password-reset/
+Disallow: /dashboard/
+Allow: /blogs/
+Allow: /sitemap.xml
+
+Sitemap: http://127.0.0.1:8000/sitemap.xml
