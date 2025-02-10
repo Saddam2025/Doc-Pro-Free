@@ -13,16 +13,6 @@
 <!-- ✅ Load Bootstrap JS (Optimized) -->
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- ✅ Load FontAwesome JS Only When Needed -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const faScript = document.createElement("script");
-        faScript.src = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js";
-        faScript.defer = true;
-        document.body.appendChild(faScript);
-    });
-</script>
-
 <!-- ✅ Load Livewire Only on Dashboard (Performance Boost) -->
 @if (request()->routeIs('dashboard'))
     <script defer src="{{ asset('livewire/livewire.min.js') }}"></script>
@@ -33,10 +23,10 @@
     document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             const adScript = document.createElement("script");
-            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-208...";
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2081671021537614";
             adScript.async = true;
             document.body.appendChild(adScript);
-        }, 3000); // Loads ads after 3 seconds (Reduces render blocking)
+        }, 1000); // Reduced delay to 1 second
     });
 </script>
 
@@ -47,8 +37,7 @@
 
         if (backToTopBtn) {
             window.addEventListener('scroll', () => {
-                backToTopBtn.classList.toggle('opacity-100', window.scrollY > 300);
-                backToTopBtn.classList.toggle('hidden', window.scrollY <= 300);
+                backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
             });
 
             backToTopBtn.addEventListener('click', (e) => {
@@ -60,11 +49,13 @@
 </script>
 
 <!-- ✅ Custom App JS (Deferred & Minified) -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const appScript = document.createElement("script");
-        appScript.src = "{{ asset('assets/app.min.js') }}";
-        appScript.defer = true;
-        document.body.appendChild(appScript);
-    });
-</script>
+@if (file_exists(public_path('assets/app.min.js')))
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const appScript = document.createElement("script");
+            appScript.src = "{{ asset('assets/app.min.js') }}";
+            appScript.defer = true;
+            document.body.appendChild(appScript);
+        });
+    </script>
+@endif

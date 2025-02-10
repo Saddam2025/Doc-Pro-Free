@@ -40,7 +40,6 @@
 </script>
 @endsection
 
-
 @section('content')
 <div class="flex items-center justify-center min-h-screen bg-gray-50">
     <div class="bg-white shadow-xl rounded-lg grid grid-cols-1 lg:grid-cols-2 w-11/12 lg:w-3/4">

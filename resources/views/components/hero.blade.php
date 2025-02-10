@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Document Maker</title>
 
-  {{-- Include your partials and/or CSS/JS bundles here --}}
   @include('layouts.partials.head')
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-  <!-- Example: Font Preconnects for performance (optional) -->
-  <!--
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  -->
+  <!-- ✅ Preload Google Fonts for Faster Rendering -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"></noscript>
 
   <style>
     :root {
-      --primary-color: #2563eb; /* e.g. Tailwind's 'blue-600' */
-      --primary-dark: #1e3a8a;  /* e.g. Tailwind's 'blue-900' */
-      --text-color: #111827;    /* e.g. Tailwind's 'gray-900' */
-      --text-secondary: #374151;/* e.g. Tailwind's 'gray-700' */
+      --primary-color: #2563eb;
+      --primary-dark: #1e3a8a;
+      --text-color: #111827;
+      --text-secondary: #374151;
       --bg-gradient: linear-gradient(to right, #f8fafc, #eef2ff);
       --transition-speed: 0.3s;
     }
@@ -34,23 +31,13 @@
       background-color: #fff;
     }
 
-    /* Fade-in effect on scroll */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Hero Section */
+    /* ✅ Fix Navbar Overlapping Hero Section */
     .hero-section {
       width: 100%;
       background: var(--bg-gradient);
-      padding: 8rem 0 6rem;
+      padding: 10rem 0 6rem; /* Adjusted padding for navbar */
     }
+
     .hero-container {
       display: flex;
       align-items: center;
@@ -60,6 +47,19 @@
       margin: 0 auto;
       padding: 0 1rem;
     }
+
+    /* ✅ Optimized Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: opacity, transform;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .hero-text {
       max-width: 550px;
     }
@@ -75,6 +75,8 @@
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
     }
+
+    /* ✅ CTA Buttons */
     .cta-buttons {
       display: flex;
       flex-direction: column;
@@ -86,7 +88,6 @@
       }
     }
 
-    /* CTA Buttons */
     .cta-btn {
       display: inline-block;
       padding: 1rem 2rem;
@@ -94,30 +95,27 @@
       font-weight: 600;
       border-radius: 10px;
       text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-      transition: background-color var(--transition-speed) ease,
-                  box-shadow var(--transition-speed) ease;
+      transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     }
+
     .cta-btn-primary {
       background: var(--primary-color);
       color: #fff;
     }
     .cta-btn-primary:hover {
       background: var(--primary-dark);
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.8);
     }
+
     .cta-btn-secondary {
-      background: transparent;
       border: 2px solid var(--primary-color);
       color: var(--primary-color);
     }
     .cta-btn-secondary:hover {
       background: var(--primary-color);
       color: #fff;
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.8);
     }
 
-    /* Hero Image */
+    /* ✅ Optimized Hero Image */
     .hero-image {
       max-width: 550px;
     }
@@ -127,13 +125,12 @@
       display: block;
       border-radius: 12px;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-      transition: opacity var(--transition-speed) ease;
     }
 
-    /* Mobile Responsiveness */
+    /* ✅ Mobile Responsiveness */
     @media (max-width: 768px) {
       .hero-section {
-        padding: 5rem 0 4rem;
+        padding: 9rem 0 4rem;
       }
       .hero-container {
         flex-direction: column;
@@ -163,22 +160,7 @@
 
 <body>
 
-  <!-- Delayed Loading of Google AdSense for Performance -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Delay AdSense loading by 3 seconds to improve initial page speed
-      setTimeout(() => {
-        const adScript = document.createElement("script");
-        adScript.src =
-          "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456";
-        adScript.async = true;
-        adScript.setAttribute("crossorigin", "anonymous");
-        document.body.appendChild(adScript);
-      }, 3000);
-    });
-  </script>
-
-  <!-- Hero Section -->
+  <!-- ✅ Optimized Hero Section -->
   <section class="hero-section fade-in">
     <div class="hero-container">
       <div class="hero-text">
@@ -189,52 +171,32 @@
           Effortlessly create <strong>invoices</strong>, <strong>CVs</strong>, <strong>receipts</strong>, <strong>credit notes</strong>, and more with our AI-powered, user-friendly tools.
         </p>
         <div class="cta-buttons">
-          <a
-            href="{{ route('features') }}"
-            class="cta-btn cta-btn-primary"
-            aria-label="Explore Features"
-          >
-            Explore Features
-          </a>
-          <a
-            href="{{ route('pricing') }}"
-            class="cta-btn cta-btn-secondary"
-            aria-label="Learn More"
-          >
-            Learn More
-          </a>
+          <a href="{{ route('features') }}" class="cta-btn cta-btn-primary">Explore Features</a>
+          <a href="{{ route('pricing') }}" class="cta-btn cta-btn-secondary">Learn More</a>
         </div>
       </div>
 
-      <!-- Hero Image -->
+      <!-- ✅ Optimized Hero Image -->
       <div class="hero-image">
-        <img
-          src="{{ asset('images/document-preview.webp') }}"
-          loading="lazy"
-          width="600"
-          height="400"
-          alt="Optimized Document Preview"
-        />
+        <img src="{{ asset('images/document-preview.webp') }}" loading="lazy" width="600" height="400" alt="Optimized Document Preview">
       </div>
     </div>
   </section>
 
-  <!-- Fade-in on scroll with IntersectionObserver -->
+  <!-- ✅ Optimized Fade-in Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const fadeInElements = document.querySelectorAll('.fade-in');
-      const observerOptions = { threshold: 0.1 };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.1 });
 
-      fadeInElements.forEach((element) => observer.observe(element));
+      fadeInElements.forEach(element => observer.observe(element));
     });
   </script>
 

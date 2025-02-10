@@ -84,6 +84,38 @@
                 'benefit'     => '✔ Unlimited templates | ✔ Auto-calculations | ✔ Digital storage',
                 'route'       => route('receipt.generator'),
                 'reverse'     => false
+            ],
+            [
+                'title'       => 'Certificate Generator',
+                'image'       => 'mockups/certificate-mockup.png',
+                'description' => 'Create professional <strong>certificates</strong> for your achievements or events.',
+                'benefit'     => '✔ High-quality design | ✔ Customizable templates | ✔ Free to use',
+                'route'       => route('certificate.generator'),
+                'reverse'     => true
+            ],
+            [
+                'title'       => 'Agreement Generator',
+                'image'       => 'mockups/agreement-mockup.png',
+                'description' => 'Generate <strong>legally binding agreements</strong> for business or personal use.',
+                'benefit'     => '✔ Pre-written clauses | ✔ Customizable terms | ✔ Instant download',
+                'route'       => route('agreement.generator'),
+                'reverse'     => false
+            ],
+            [
+                'title'       => 'Job Offer Letter Generator',
+                'image'       => 'mockups/job-offer-mockup.png',
+                'description' => 'Easily create professional <strong>job offer letters</strong> for recruitment.',
+                'benefit'     => '✔ Ready-to-use templates | ✔ Customizable sections | ✔ Free to use',
+                'route'       => route('job.offer.letter.generator'),
+                'reverse'     => true
+            ],
+            [
+                'title'       => 'Proforma Invoice Generator',
+                'image'       => 'mockups/proforma-mockup.png',
+                'description' => 'Create <strong>proforma invoices</strong> to provide estimates for your customers.',
+                'benefit'     => '✔ Detailed breakdown | ✔ Printable | ✔ Customizable items',
+                'route'       => route('proforma.invoice.generator'),
+                'reverse'     => false
             ]
         ] as $feature)
             <div class="flex flex-col md:flex-row {{ $feature['reverse'] ? 'md:flex-row-reverse' : '' }} items-center gap-10 mb-20" data-aos="fade-up" data-aos-delay="150">

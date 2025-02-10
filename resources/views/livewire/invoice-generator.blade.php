@@ -38,7 +38,10 @@
 
 <div class="container my-5">
     <h2 class="text-center mb-4 fw-bold text-dark">Invoice Generator</h2>
-
+    <p class="text-center text-muted lead">
+        Create a professional Invoice instantly with our **free online Invoice Generator**. No signup required!
+        Simply enter your details, customize your Invoice, and **download your Invoice as a PDF**.
+    </p>
     <!-- Display Validation Errors -->
     @if ($errors->any())
         <div class="alert alert-danger">

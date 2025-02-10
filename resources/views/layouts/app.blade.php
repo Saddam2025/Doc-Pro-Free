@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" class="scroll-smooth">
+<html lang="{{ app()->getLocale() ?? config('app.locale', 'en') }}" class="scroll-smooth">
 
 <head>
-    <!-- ✅ Essential Meta & SEO -->
+    <!-- Essential Meta & SEO -->
     @include('layouts.partials.head')
 
-    <!-- ✅ Load Assets via Vite -->
+    <!-- Load Assets via Vite with Fallback -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="{{ asset('js/app.js') }}" defer></script>
+    </noscript>
 
-    <!-- ✅ Livewire Styles -->
+    <!-- Livewire Styles -->
     @livewireStyles
 
-    <!-- ✅ Custom Global Styles -->
+    <!-- Custom Global Styles -->
     <style>
-        /* ✅ Ensure Consistent Layout */
+        html {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f9fafb;
             margin: 0;
             padding: 0;
-        }
-
-        header {
-            height: 70px;
-            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         main {
+            flex: 1;
             padding-top: 80px;
             min-height: 100vh;
         }
 
-        /* ✅ Back-to-Top Button Styling */
+        /* Back-to-Top Button Styling */
         #backToTop {
             display: none;
             position: fixed;
@@ -51,55 +58,60 @@
             background: #1e40af;
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.documentElement.style.visibility = "visible";
+            document.documentElement.style.opacity = "1";
+        });
+    </script>
 </head>
 
-<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 antialiased">
-
-    <!-- ✅ Navbar (Fixed) -->
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 antialiased flex flex-col min-h-screen">
+    
+    <!-- Navbar (Fixed) -->
     <header class="w-full fixed top-0 left-0 bg-white shadow-md z-50 h-[70px]">
         @include('layouts.partials.navbar', ['title' => 'Free Document Maker - Effortless Document Generation'])
     </header>
 
-    <!-- ✅ Main Content Area -->
-    <main class="w-full px-4 sm:px-6 lg:px-8">
+    <!-- Main Content Area -->
+    <main class="flex-1">
         @yield('content')
-        {{ $slot ?? '' }} <!-- Blade Components Slot -->
+        {{ $slot ?? '' }}
     </main>
 
-    <!-- ✅ Footer (Loaded Once for Performance) -->
+    <!-- Footer -->
     @once
         <footer class="w-full bg-gray-800 text-white py-6 text-left">
             @include('layouts.partials.footer')
         </footer>
     @endonce
 
-    <!-- ✅ Back-to-Top Button -->
-    <button id="backToTop" aria-label="Back to Top">↑</button>
+    <!-- Back-to-Top Button -->
+    <button id="backToTop" aria-label="Back to Top" class="focus:outline-none">↑</button>
 
-    <!-- ✅ Scripts & Performance Enhancements -->
+    <!-- Scripts -->
     @include('layouts.partials.scripts')
-
-    <!-- ✅ Livewire Scripts -->
     @livewireScripts
 
-    <!-- ✅ Back-to-Top Button Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const backToTop = document.getElementById("backToTop");
 
             window.addEventListener("scroll", () => {
-                if (window.scrollY > 300) {
-                    backToTop.style.display = "block";
-                } else {
-                    backToTop.style.display = "none";
-                }
+                backToTop.style.display = window.scrollY > 300 ? "block" : "none";
             });
 
             backToTop.addEventListener("click", () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
             });
+
+            backToTop.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            });
         });
     </script>
-
 </body>
 </html>

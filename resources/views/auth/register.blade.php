@@ -78,9 +78,6 @@
 </script>
 @endsection
 
-
-
-
 @push('scripts')
     <!-- Google AdSense Auto Ads Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2081671021537614"

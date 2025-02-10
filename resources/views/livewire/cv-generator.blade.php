@@ -38,7 +38,13 @@
 
 
 <div class="container my-5">
-    <h2 class="text-center mb-4 fw-bold text-dark">CV Generator</h2>
+    <!-- Page Title & Introduction -->
+    <h2 class="text-center mb-4 fw-bold text-dark">Free Online CV Generator</h2>
+
+    <p class="text-center text-muted lead">
+        Create a professional CV instantly with our **free online CV maker**. No signup required!
+        Simply enter your details, customize your resume, and **download your CV as a PDF**.
+    </p>
 
     <form wire:submit.prevent="generatePDF" class="bg-white p-5 rounded shadow-sm">
         <!-- Profile Photo Upload -->

@@ -39,7 +39,10 @@
 
 <div class="container my-5">
     <h2 class="text-center mb-4 fw-bold text-dark">Proforma Invoice Generator</h2>
-
+    <p class="text-center text-muted lead">
+        Create a professional Proforma Invoice instantly with our **free online Proforma Invoice Generator**. No signup required!
+        Simply enter your details, customize your Proforma Invoice, and **download your Proforma Invoice as a PDF**.
+    </p>
     <!-- Display Validation / Error / Success Messages -->
     @if ($errors->any())
         <div class="alert alert-danger">

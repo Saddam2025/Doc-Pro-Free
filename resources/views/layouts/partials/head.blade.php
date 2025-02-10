@@ -13,13 +13,16 @@
     <title>@yield('title', 'Free Document Maker | Create Invoices, CVs & More - Doc Pro')</title>
 
     <!-- ✅ Canonical URL -->
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="{{ request()->url() }}">
 
     <!-- ✅ Preload Critical Resources -->
-    <link rel="preload" as="image" href="{{ asset('images/Logo.webp') }}" type="image/webp">
+    @if (file_exists(public_path('images/Logo.webp')))
+        <link rel="preload" as="image" href="{{ asset('images/Logo.webp') }}" type="image/webp">
+    @endif
     <link rel="preload" as="style" href="{{ asset('css/app.css') }}">
     <link rel="preload" as="script" href="{{ asset('js/app.js') }}">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"></noscript>
 
     <!-- ✅ Favicon & Icons -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -32,7 +35,7 @@
     <meta property="og:title" content="@yield('title', 'Doc Pro - Free Document Generator')">
     <meta property="og:description" content="@yield('meta_description', 'Generate invoices, receipts, and agreements instantly for free.')">
     <meta property="og:image" content="{{ asset('images/preview.png') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="{{ request()->url() }}">
     <meta property="og:site_name" content="Doc Pro">
     <meta property="og:locale" content="en_US">
 
@@ -41,10 +44,7 @@
     <meta name="twitter:title" content="@yield('title', 'Doc Pro - Free Document Generator')">
     <meta name="twitter:description" content="@yield('meta_description', 'Generate invoices, receipts, and agreements instantly for free.')">
     <meta name="twitter:image" content="{{ asset('images/preview.png') }}">
-    <meta name="twitter:site" content="@YourActualTwitterHandle"> <!-- Update this -->
-
-    <!-- ✅ Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <meta name="twitter:site" content="@yourTwitterHandle">
 
     <!-- ✅ Schema Markup (Structured Data for SEO) -->
     <script type="application/ld+json">
@@ -74,36 +74,10 @@
     }
     </script>
 
-    <!-- ✅ Breadcrumb Schema -->
-    @if(isset($breadcrumb) && is_array($breadcrumb))
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.freedocumentmaker.com"
-            }
-            @foreach($breadcrumb as $index => $item)
-            ,{
-                "@type": "ListItem",
-                "position": {{ $index + 2 }},
-                "name": "{{ $item['name'] }}",
-                "item": "{{ $item['url'] }}"
-            }
-            @endforeach
-        ]
-    }
-    </script>
-    @endif
-
-    <!-- ✅ Google AdSense (Lazy Load for Performance) -->
+    <!-- ✅ Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2081671021537614" crossorigin="anonymous"></script>
 
-    <!-- ✅ Minimized Google Analytics (If Needed) -->
+    <!-- ✅ Google Analytics -->
     @if(isset($setting->google_analytic_code))
         {!! $setting->google_analytic_code !!}
     @endif

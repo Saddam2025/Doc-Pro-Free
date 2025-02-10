@@ -48,29 +48,32 @@
 @endpush
 
 @section('content')
-    {{-- ✅ Hero Section --}}
-    <section class="py-20 bg-gradient-to-r from-blue-50 to-indigo-100">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-16" data-aos="fade-up">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-6">About Doc Pro</h1>
-                <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                    Welcome to <strong>Doc Pro</strong>—your ultimate solution for fast, easy, and professional document generation. 
-                    Designed for individuals, freelancers, and businesses, our platform <strong>saves you time, reduces manual effort, and helps you focus on what truly matters—your goals.</strong>
-                </p>
-                <p class="text-lg sm:text-xl text-gray-600 mt-4 leading-relaxed">
-                    With Doc Pro, all of our powerful tools are <strong>100% free</strong>, allowing you to create <strong>invoices, resumes, agreements, receipts, and certificates</strong> with ease.
-                    No hidden fees, no subscriptions—just effortless document creation at your fingertips.
-                </p>
-            </div>
-        </div>
-    </section>
 
-    {{-- Our Tools --}}
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-12" data-aos="fade-up" data-aos-delay="100">Our Free Document Generation Tools</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach([
+{{-- ✅ Hero Section --}}
+<section class="py-20 bg-gradient-to-r from-blue-50 to-indigo-100">
+    <div class="container mx-auto px-6 text-center">
+        <div class="mb-16" data-aos="fade-up">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-6">About Doc Pro</h1>
+            <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
+                Welcome to <strong>Doc Pro</strong>—your ultimate solution for fast, easy, and professional document generation. 
+                Designed for individuals, freelancers, and businesses, our platform <strong>saves you time, reduces manual effort, and helps you focus on what truly matters—your goals.</strong>
+            </p>
+            <p class="text-lg sm:text-xl text-gray-600 mt-4 leading-relaxed">
+                With Doc Pro, all of our powerful tools are <strong>100% free</strong>, allowing you to create <strong>invoices, resumes, agreements, receipts, and certificates</strong> with ease.
+                No hidden fees, no subscriptions—just effortless document creation at your fingertips.
+            </p>
+        </div>
+    </div>
+</section>
+
+{{-- ✅ Our Tools --}}
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 text-center" data-aos="fade-up" data-aos-delay="100">
+            Our Free Document Generation Tools
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        @foreach([
                     ['icon' => 'file-invoice-dollar', 'title' => 'Invoice Generator', 'description' => 'Generate professional invoices quickly and efficiently. Organize payments and maintain transaction records effortlessly with our <strong>free</strong> tool.'],
                     ['icon' => 'file-invoice', 'title' => 'Credit Note Generator', 'description' => 'Easily create credit notes for refunds or adjustments while maintaining professionalism. Completely <strong>free</strong>!'],
                     ['icon' => 'file-contract', 'title' => 'Purchase Order Generator', 'description' => 'Streamline your supplier management with precise purchase orders—all <strong>free</strong> to use.'],
@@ -86,17 +89,16 @@
                     ['icon' => 'certificate', 'title' => 'Certificate Generator', 'description' => 'Create high-quality certificates for achievements or events with this <strong>free</strong> tool.'],
                     ['icon' => 'gavel', 'title' => 'Agreement Generator', 'description' => 'Generate legally sound agreements for personal or business needs with this <strong>free</strong> tool.']
                 ] as $key => $tool)
-                    <div class="bg-white rounded-lg p-6 sm:p-8 shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ $key * 100 }}">
-                        <i class="fas fa-{{ $tool['icon'] }} text-4xl sm:text-6xl text-blue-600 mx-auto mb-4 sm:mb-6" aria-hidden="true"></i>
-                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">{{ $tool['title'] }}</h3>
-                        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">{!! $tool['description'] !!}</p>
-                    </div>
-                @endforeach
-            </div>
+                <div class="bg-white rounded-lg p-6 sm:p-8 shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ $key * 100 }}">
+                    <i class="fas fa-{{ $tool['icon'] }} text-4xl sm:text-6xl text-blue-600 mx-auto mb-4 sm:mb-6" aria-hidden="true"></i>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">{{ $tool['title'] }}</h3>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">{{ $tool['description'] }}</p>
+                </div>
+            @endforeach
         </div>
-    </section>
-
-    {{-- Our Mission --}}
+    </div>
+</section>
+{{-- Our Mission --}}
     <section class="py-16 bg-gray-100">
         <div class="container mx-auto px-4 text-center" data-aos="fade-up" data-aos-delay="200">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-6">Our Mission</h2>
@@ -131,53 +133,19 @@
             </div>
         </div>
     </section>
+{{-- ✅ Call-to-Action --}}
+<section class="py-16 bg-blue-600 text-white text-center">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold">Get Started with Doc Pro Today</h2>
+        <p class="text-lg mt-4">
+            Join thousands of users who create professional documents every day—free, fast, and secure!
+        </p>
+        <a href="{{ route('register') }}" class="mt-6 inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-200 transition">
+            Create Your First Document
+        </a>
+    </div>
+</section>
 
-    {{-- ✅ Call-to-Action --}}
-    <section class="py-16 bg-blue-600 text-white text-center">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold">Get Started with Doc Pro Today</h2>
-            <p class="text-lg mt-4">
-                Join thousands of users who create professional documents every day—free, fast, and secure!
-            </p>
-            <a href="{{ route('register') }}" class="mt-6 inline-block bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-200 transition">
-                Create Your First Document
-            </a>
-        </div>
-    </section>
-
-    {{-- ✅ Our Partners --}}
-    <section id="partners" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-12" data-aos="fade-up">
-                Our Trusted Partners
-            </h2>
-            <div class="flex flex-wrap justify-center items-center gap-12">
-                @foreach([
-                    ['name' => 'Partner 1', 'logo' => 'partner1.png'],
-                    ['name' => 'Partner 2', 'logo' => 'partner2.png'],
-                    ['name' => 'Partner 3', 'logo' => 'partner3.png'],
-                    ['name' => 'Partner 4', 'logo' => 'partner4.png'],
-                    ['name' => 'Partner 5', 'logo' => 'partner5.png'],
-                ] as $partner)
-                    <div class="w-24 sm:w-32 h-16 flex items-center justify-center bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
-                        <img src="{{ asset('partners/' . $partner['logo']) }}" alt="{{ $partner['name'] }} Logo" class="max-h-full object-contain" loading="lazy">
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- ✅ Google AdSense Integration --}}
-    <section class="py-16 bg-white text-center">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle"
-             style="display:block;width:100%;height:auto"
-             data-ad-client="ca-pub-2081671021537614"
-             data-ad-slot="7423037944"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </section>
 @endsection
 
 @push('styles')

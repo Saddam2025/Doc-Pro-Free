@@ -61,59 +61,24 @@
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Our Pricing Options</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach([
-                [
-                    'title'    => 'Basic Plan',
-                    'price'    => 'Free',
-                    'features' => ['Limited templates', 'Basic customization', 'Watermarked downloads'],
-                    'cta'      => 'Get Started',
-                    'link'     => '#',
-                    'color'    => 'blue'
-                ],
-                [
-                    'title'    => 'Premium Plan',
-                    'price'    => '$10–$20/month',
-                    'features' => ['Unlimited downloads', 'Premium templates', 'Cloud storage'],
-                    'cta'      => 'Subscribe Now',
-                    'link'     => '#',
-                    'color'    => 'yellow'
-                ],
-                [
-                    'title'    => 'One-Time Templates',
-                    'price'    => '$5–$20/template',
-                    'features' => ['Pay per template', 'No recurring fees', 'Professional designs'],
-                    'cta'      => 'Browse Templates',
-                    'link'     => '#',
-                    'color'    => 'green'
-                ],
-                [
-                    'title'    => 'White-Label Solution',
-                    'price'    => '$100–$500/month',
-                    'features' => ['Custom branding', 'Priority support', 'Analytics & reporting'],
-                    'cta'      => 'Contact Us',
-                    'link'     => route('contact', ['plan' => 'White-Label Solution']),
-                    'color'    => 'red'
-                ],
-                [
-                    'title'    => 'Enterprise Plan',
-                    'price'    => '$100+/month',
-                    'features' => ['Bulk document creation', 'Team accounts', 'API integrations'],
-                    'cta'      => 'Contact Us',
-                    'link'     => route('contact', ['plan' => 'Enterprise']),
-                    'color'    => 'purple'
-                ]
+                ['title' => 'Basic Plan', 'price' => 'Free', 'features' => ['Limited templates', 'Basic customization', 'Watermarked downloads'], 'cta' => 'Get Started', 'link' => '#', 'color' => 'blue'],
+                ['title' => 'Premium Plan', 'price' => '$10–$20/month', 'features' => ['Unlimited downloads', 'Premium templates', 'Cloud storage'], 'cta' => 'Subscribe Now', 'link' => '#', 'color' => 'yellow'],
+                ['title' => 'One-Time Templates', 'price' => '$5–$20/template', 'features' => ['Pay per template', 'No recurring fees', 'Professional designs'], 'cta' => 'Browse Templates', 'link' => '#', 'color' => 'green'],
+                ['title' => 'White-Label Solution', 'price' => '$100–$500/month', 'features' => ['Custom branding', 'Priority support', 'Analytics & reporting'], 'cta' => 'Contact Us', 'link' => route('contact', ['plan' => 'White-Label Solution']), 'color' => 'red'],
+                ['title' => 'Enterprise Plan', 'price' => '$100+/month', 'features' => ['Bulk document creation', 'Team accounts', 'API integrations'], 'cta' => 'Contact Us', 'link' => route('contact', ['plan' => 'Enterprise']), 'color' => 'purple']
             ] as $plan)
-                <div class="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl transition">
+                <div class="bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 border-t-4 border-{{ $plan['color'] }}-500">
                     <h3 class="text-2xl font-bold text-{{ $plan['color'] }}-600 mb-2">{{ $plan['title'] }}</h3>
                     <p class="text-xl font-semibold mb-4">{{ $plan['price'] }}</p>
                     <ul class="text-gray-600 space-y-2 mb-6">
                         @foreach($plan['features'] as $feature)
                             <li class="flex items-center justify-center space-x-2">
-                                <i class="fas fa-check-circle text-green-500"></i>
+                                <i class="fas fa-check-circle text-{{ $plan['color'] }}-500"></i>
                                 <span>{{ $feature }}</span>
                             </li>
                         @endforeach
                     </ul>
-                    <a href="{{ $plan['link'] }}" class="bg-{{ $plan['color'] }}-600 hover:bg-{{ $plan['color'] }}-700 text-white font-medium px-6 py-3 rounded-lg transition">
+                    <a href="{{ $plan['link'] }}" class="bg-{{ $plan['color'] }}-600 hover:bg-{{ $plan['color'] }}-700 text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition">
                         {{ $plan['cta'] }}
                     </a>
                 </div>
@@ -134,6 +99,58 @@
                 <li><strong>Enjoy Ongoing Support:</strong> Our team is here to assist you every step of the way.</li>
             </ol>
         </div>
+    </div>
+</section>
+
+<!-- ✅ Testimonials -->
+<section class="py-16 bg-gray-200 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">What Our Customers Say</h2>
+    <div class="flex justify-center space-x-8">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md">
+            <p class="text-gray-600">"Doc Pro has transformed the way I create invoices. It's so simple to use, and the results look professional every time!"</p>
+            <p class="mt-4 font-semibold">John Doe, Freelancer</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md">
+            <p class="text-gray-600">"We love the flexibility of Doc Pro. The ability to create different types of documents at such an affordable price is invaluable."</p>
+            <p class="mt-4 font-semibold">Jane Smith, Startup Owner</p>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ Compare Plans Table -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-6">Compare Our Plans</h2>
+        <table class="table-auto w-full text-left text-gray-800">
+            <thead>
+                <tr class="bg-blue-600 text-white">
+                    <th class="px-4 py-2">Feature</th>
+                    <th class="px-4 py-2">Basic Plan</th>
+                    <th class="px-4 py-2">Premium Plan</th>
+                    <th class="px-4 py-2">Enterprise Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border px-4 py-2">Custom Templates</td>
+                    <td class="border px-4 py-2">✔</td>
+                    <td class="border px-4 py-2">✔</td>
+                    <td class="border px-4 py-2">✔</td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Client Management</td>
+                    <td class="border px-4 py-2">✘</td>
+                    <td class="border px-4 py-2">✔</td>
+                    <td class="border px-4 py-2">✔</td>
+                </tr>
+                <tr>
+                    <td class="border px-4 py-2">Priority Support</td>
+                    <td class="border px-4 py-2">✘</td>
+                    <td class="border px-4 py-2">✔</td>
+                    <td class="border px-4 py-2">✔</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
 

@@ -3,37 +3,39 @@
 @push('scripts')
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Load AdSense script after a short delay for improved performance
-    setTimeout(() => {
-      const adScript = document.createElement("script");
-      adScript.src =
-        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2081671021537614";
-      adScript.async = true;
-      adScript.setAttribute("crossorigin", "anonymous");
-      document.body.appendChild(adScript);
-    }, 3000);
+    // ✅ Optimize AdSense Load (Conditionally Load If Needed)
+    if (document.querySelector(".adsense-container")) {
+        setTimeout(() => {
+          const adScript = document.createElement("script");
+          adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2081671021537614";
+          adScript.async = true;
+          adScript.setAttribute("crossorigin", "anonymous");
+          document.body.appendChild(adScript);
+        }, 800);  // Slightly reduced delay
+    }
 
-    // Smooth fade-in effect using Intersection Observer
+    // ✅ Smooth fade-in effect using Intersection Observer for elements with .fade-up class
     const fadeElements = document.querySelectorAll(".fade-up");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
+    if ("IntersectionObserver" in window) {
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: "0px 0px -50px 0px", threshold: 0.2 });
 
-    fadeElements.forEach((el) => observer.observe(el));
+        fadeElements.forEach(el => observer.observe(el));
+    } else {
+        fadeElements.forEach(el => el.classList.add("visible"));  // Fallback for older browsers
+    }
   });
 </script>
 @endpush
 
 @section('content')
-  {{-- Hero Section --}}
+  {{-- ✅ Hero Section --}}
   <x-hero />
 
   {{-- Highlights Section --}}
@@ -55,19 +57,19 @@
           <x-card 
             :icon="$icon" 
             :title="$title" 
-            :description="[
+            :description="[ 
               'easy_to_use' => 'Simplify the process of creating documents with our intuitive tools, accessible to everyone.',
               'free' => 'Enjoy all features at no cost. No hidden charges or subscriptions.',
               'professional_results' => 'Achieve polished and industry-standard documents in just minutes.',
               'accessible_anywhere' => 'Generate documents on any device, anytime, anywhere, with an internet connection.',
             ][$key]"
-            class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg"
+            class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg fade-up"
           />
         @endforeach
       </div>
     </div>
   </section>
-  
+
   {{-- Features Section --}}
   <section id="features" class="py-12 sm:py-16 bg-white">
     <div class="container mx-auto px-4 text-center">
@@ -91,13 +93,13 @@
             :title="$title" 
             :description="$description"
             bgColor="bg-gray-50" 
-            class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg"
+            class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg fade-up"
           />
         @endforeach
       </div>
     </div>
   </section>
-  
+
   {{-- How It Works Section --}}
   <section class="relative bg-gray-100 py-12 sm:py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
@@ -106,7 +108,7 @@
         <div class="p-6 bg-white rounded-3xl shadow-md transition-shadow duration-300 hover:shadow-lg">
           <img 
             src="{{ asset('images/Invoice-bro.svg') }}" 
-            alt="Working on Laptop"
+            alt="Illustration of a person working on a laptop"
             loading="lazy"
             decoding="async"
             class="w-full max-w-lg mx-auto rounded-2xl"
@@ -147,7 +149,6 @@
             @endforeach
           </div>
         </div>
-      
       </div>
     </div>
   </section>
@@ -362,9 +363,35 @@
       <a 
         href="{{ route('register') }}" 
         class="px-6 py-3 bg-white text-indigo-600 font-bold rounded-lg transition-colors duration-300 hover:text-indigo-800 focus:outline-none"
+        aria-label="Sign Up for Free"
       >
         Get Started for Free
       </a>
     </div>
   </section>
+
+  {{-- ✅ Optimize Newsletter Form (AJAX Submission) --}}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const newsletterForm = document.querySelector("#newsletterForm");
+        if (!newsletterForm) return;
+        
+        newsletterForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch("{{ route('subscribe') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector("#newsletterMessage").innerText = data.message;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+  </script>
 @endsection
+
+
